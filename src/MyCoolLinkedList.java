@@ -9,7 +9,7 @@ public class MyCoolLinkedList<E> {
         head = null;
     }
     
-    
+
     //------- Main methods to be used----------\\
     
      public void clear()
