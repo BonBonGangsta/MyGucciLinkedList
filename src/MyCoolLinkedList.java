@@ -48,11 +48,104 @@ public class MyCoolLinkedList<E> {
             lastNode().next = temp; // ...append new node to end of list
         }
     }
+     
+    public void delete(int key)
+    {  
+       // if the head is null, the list is empty, no point deleting anything.
+       if(head == null)
+       {
+           return;
+       }
+       // we need a temporary node to traverse the beyond...
+       Node temp = head;
+       // keep going through each iteration until we reach the node
+       // before the index -1
+       for (int counter = 0; temp != null && counter < key; counter++ )
+       {
+          // move temp to what ever the next one is pointing to.
+          temp = temp.next;
+          if (temp == null || temp.next == null)
+          {
+              // if temp is now null, that means we reached the end, and they
+              // gave a key index greater than the size of the of the LL
+              return;
+          }   
+        }
+        //by now the temp node will have gotten in position of the node
+        // right before the node we need to delete, so we pull it off in one 
+        // line
+        // we assign the next pointer to the same pointer to the 
+        // the pointer the next Node was pointing to in its next.
+        temp.next = temp.next.next; // super risky though
+    }
     
-    
+    public void swapNodes(int dis, int dat)
+     {  
+        int later;
+        int sooner;
+        // check which one is later in the LL and which one comes sooner
+        if (dis < dat)
+        {
+            sooner = dis;
+            later = dat;
+        }
+        else
+        {
+            sooner = dat;
+            later = dis;
+        }
+        // if the head is null, the list is empty, no point swapping anything.
+        if(head == null)
+        {
+            return;
+        }
+        // we need a Two temporary node to traverse the beyond...
+        Node swap1 = head;
+        Node swap2 = head;
+        boolean found = false;
+        while(!found)
+        {
+        // keep going through each iteration until we reach the node
+        // before the index -1 of the furthest key passed.
+        // Why? you may ask, well it's pretty simple, if the later index
+        // exists, than the one before is bound to exist.
+        for (int counter = 0; swap1 != null && counter < later; counter++ )
+        {
+           // move temp to what ever the next one is pointing to.
+           swap1 = swap1.next;
+           // check to see if the node is pointing to anything after
+           if (swap1 == null || swap1.next == null)
+           {
+            // if temp is now null, that means we reached the end, and they
+            // gave a key index greater than the size of the of the LL
+            return;
+           }
+        }
+        found = true;
+        for (int counter = 0; swap2 != null && counter < sooner; counter++ )
+          {
+           // move temp to what ever the next one is pointing to.
+           swap2 = swap2.next;
+          }
+        }
+        if(found)
+        {
+            Node swapTemp = swap1;
+            swap1.next = swap2.next;
+            swap2.next = swapTemp.next;
+        }  
+     }
      // ------------- submethods ---------------\\
+       public boolean more()
+    {
+        return iterator.next != null;
+    }
      
-     
+        public E next()
+    {
+        iterator = iterator.next;	// move to next node...	
+        return iterator.info;		// ...return object stored there
+    }
     /**
      * Defining the Node class
      */
