@@ -135,6 +135,21 @@ public class MyCoolLinkedList<E> {
             swap2.next = swapTemp.next;
         }  
      }
+    
+    public void reverse()
+    {
+        // we are going to a few notes to traverse the LL
+        Node current = head.next;
+        Node previous = null;
+        Node next = null;
+        while (current != null)
+        {
+            next = current.next;
+            current.next = previous;
+            current = next;
+        }
+        this.head = previous;
+    }
      // ------------- submethods ---------------\\
        public boolean more()
     {
