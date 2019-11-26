@@ -125,6 +125,10 @@ public class MyCoolLinkedList<E> {
             sooner = dat;
             later = dis;
         }
+        if (dis == dat)
+        {
+            return;
+        }
         // if the head is null, the list is empty, no point swapping anything.
         if(head == null)
         {
@@ -147,9 +151,7 @@ public class MyCoolLinkedList<E> {
            // check to see if the node is pointing to anything after
            if (swap1 == null || swap1.next == null)
            {
-            // if temp is now null, that means we reached the end, and they
-            // gave a key index greater than the size of the of the LL
-            return;
+                swap1 = null; // the furthest node points to nowhere
            }
         }
         found = true;
@@ -161,9 +163,14 @@ public class MyCoolLinkedList<E> {
         }
         if(found)
         {
+            if (swap1.next == null)
+            {
+               swap1.next = swap2.next;
+               
+            }
             Node swapTemp = swap1;
-            swap1.next = swap2.next;
-            swap2.next = swapTemp.next;
+            swap1.next = swap2;
+            swap2.next = swapTemp;
         }  
      }
     
@@ -171,17 +178,29 @@ public class MyCoolLinkedList<E> {
     {
         if (head != null)
         {
-            // we are going to a few notes to traverse the LL
-            Node current = head.next;
-            Node previous = null;
-            Node next = null;
-            while (current != null)
+            // create two start points for the start and end of the LL
+            Node start = this.head;
+            Node tail = this.head;
+            
+            int lengthOfLinkedList = 0;
+            //traverse until the last node
+            while (tail.next != null)
             {
-                next = current.next;
-                current.next = previous;
-                current = next;
+                tail = tail.next;
+                lengthOfLinkedList++;
             }
-            this.head = previous;
+            
+            int numberOfRuns = lengthOfLinkedList / 2; // will force an int
+            // this will give us how many times we need to swap nodes
+            for (int i = 0; i < numberOfRuns ; i++)
+            {
+                // create a temporary node to store the start
+                Node swapTemp = start;
+                start.next = tail; // the start points turns to the end
+                tail.next = swapTemp; //end becomes the front
+            }
+                
+            
         }
     }
     
