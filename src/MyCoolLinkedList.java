@@ -181,6 +181,18 @@ public class MyCoolLinkedList<E> {
         }
         this.head = previous;
     }
+    
+    public String toString()
+    {
+        String out = "";
+        Node temp = head; 		// start at head of list 
+        while (temp != null)            // while more nodes on list...
+        {
+            out += temp.info + "  ";	// ...append current obj
+            temp = temp.next;		// ...and move to next node
+        }
+        return out + "\n";
+    }
      // ------------- submethods ---------------\\
        public boolean more()
     {

@@ -36,7 +36,34 @@ public class ListTester {
            {
                thomas.append(fileScan.nextInt());
            }
-           if()
+           // if the action is add
+           if(listAction.equals("ADD"))
+           {
+               int index = fileScan.nextInt(); // index to replace
+               int value = fileScan.nextInt(); // value to add
+               thomas.addNode(index, value); // pass them to thomas
+           }
+           // if the action is delete
+           if(listAction.equals("DELETE"))
+           {
+               thomas.delete(fileScan.nextInt()); // pass the index to delete
+           }
+           // if action is swap
+           if(listAction.equals("SWAP"))
+           {
+               int firstIndex = fileScan.nextInt(); // index1 to swap
+               int secondIndex = fileScan.nextInt(); // index2 to swap
+               thomas.swapNodes(firstIndex, secondIndex); // pass them along
+           }
+           if(listAction.equals("REVERSE"))
+           {
+               thomas.reverse(); // thomas will reverse the list
+           }
+           else
+           {
+               thomas.clear(); // clear list
+           }
+           thomas.toString(); // print the list
        }
        
    }
