@@ -1,4 +1,12 @@
+/*
+    I affirm that this program is entirely my own work and none 
+    of it is the work of any other person.
+	
+        ___________________
+	Byron De Paz
+        3999061
 
+ */
 public class MyCoolLinkedList<E> {
     
     private Node head; 
@@ -77,6 +85,29 @@ public class MyCoolLinkedList<E> {
         // we assign the next pointer to the same pointer to the 
         // the pointer the next Node was pointing to in its next.
         temp.next = temp.next.next; // super risky though
+    }
+    
+    public void addNode(int index, E x)
+    {
+        if(head == null)
+       {
+           this.append(x);
+       }
+        // to add an node after an index, use a for loop to get to the
+        // node before the index given.
+        Node temp = head;
+        for (int counter = 0; temp!= null && counter < index; counter++ )
+        {
+            temp = temp.next; // keep going through the list
+        }
+        // create the node of x
+        Node newN = new Node(x);
+        // assign the next pointer of the new node to the node
+        // temp is pointing to
+        newN.next = temp.next;
+        // now have temp point to the new node.
+        temp.next = newN;
+        
     }
     
     public void swapNodes(int dis, int dat)
