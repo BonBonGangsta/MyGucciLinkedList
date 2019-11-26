@@ -25,22 +25,6 @@ public class MyCoolLinkedList<E> {
         head = null;
     }
     
-    private Node lastNode()
-    {
-        if (head == null)       
-        {
-            return null;        
-        } 
-        else
-        {
-            Node temp = head;
-            while (temp.next != null)
-            {
-                temp = temp.next;
-            }
-            return temp;
-        }
-    }
     
      public void append(E x)
     {
@@ -53,7 +37,12 @@ public class MyCoolLinkedList<E> {
         } 
         else                        // if non-empty...
         {
-            lastNode().next = temp; // ...append new node to end of list
+            Node tracer = head;
+            while (tracer.next != null)
+            {
+                tracer = tracer.next;
+            }
+            tracer.next = temp;    
         }
     }
      
@@ -64,27 +53,29 @@ public class MyCoolLinkedList<E> {
        {
            return;
        }
-       // we need a temporary node to traverse the beyond...
-       Node temp = head;
-       // keep going through each iteration until we reach the node
-       // before the index -1
-       for (int counter = 0; temp != null && counter < key; counter++ )
+       if (key == 1)
        {
-          // move temp to what ever the next one is pointing to.
-          temp = temp.next;
-          if (temp == null || temp.next == null)
-          {
-              // if temp is now null, that means we reached the end, and they
-              // gave a key index greater than the size of the of the LL
-              return;
-          }   
-        }
-        //by now the temp node will have gotten in position of the node
-        // right before the node we need to delete, so we pull it off in one 
-        // line
-        // we assign the next pointer to the same pointer to the 
-        // the pointer the next Node was pointing to in its next.
-        temp.next = temp.next.next; // super risky though
+           head = head.next;
+       }
+       else
+       {
+           // we need a temporary node to traverse the beyond...
+           Node temp = head;
+           // keep going through each iteration until we reach the node
+           // before the index -1
+           for (int counter = 2; counter < key; counter++ )
+           {
+              // move temp to what ever the next one is pointing to.
+              temp = temp.next;
+    
+           }
+            //by now the temp node will have gotten in position of the node
+            // right before the node we need to delete, so we pull it off in one 
+            // line
+            // we assign the next pointer to the same pointer to the 
+            // the pointer the next Node was pointing to in its next.
+            temp.next = temp.next.next; // super risky though
+       }
     }
     
     public void addNode(int index, E x)
@@ -93,10 +84,19 @@ public class MyCoolLinkedList<E> {
        {
            this.append(x);
        }
+       if (index == 1)
+       {
+           Node temp = head;
+           Node newN = new Node(x);
+           newN.next = head;
+           head = newN;
+       }
+       else
+       {
         // to add an node after an index, use a for loop to get to the
         // node before the index given.
         Node temp = head;
-        for (int counter = 0; temp!= null && counter < index; counter++ )
+        for (int counter = 2; counter < index; counter++ )
         {
             temp = temp.next; // keep going through the list
         }
@@ -107,20 +107,20 @@ public class MyCoolLinkedList<E> {
         newN.next = temp.next;
         // now have temp point to the new node.
         temp.next = newN;
-        
+       }
     }
     
     public void swapNodes(int dis, int dat)
      {  
-        int later;
-        int sooner;
+        int later = 0;
+        int sooner = 0;
         // check which one is later in the LL and which one comes sooner
         if (dis < dat)
         {
             sooner = dis;
             later = dat;
         }
-        else
+        if (dis > dat)
         {
             sooner = dat;
             later = dis;
@@ -140,7 +140,7 @@ public class MyCoolLinkedList<E> {
         // before the index -1 of the furthest key passed.
         // Why? you may ask, well it's pretty simple, if the later index
         // exists, than the one before is bound to exist.
-        for (int counter = 0; swap1 != null && counter < later; counter++ )
+        for (int counter = 1; counter < later; counter++ )
         {
            // move temp to what ever the next one is pointing to.
            swap1 = swap1.next;
@@ -153,7 +153,7 @@ public class MyCoolLinkedList<E> {
            }
         }
         found = true;
-        for (int counter = 0; swap2 != null && counter < sooner; counter++ )
+        for (int counter = 1; counter < sooner; counter++ )
           {
            // move temp to what ever the next one is pointing to.
            swap2 = swap2.next;
@@ -169,17 +169,20 @@ public class MyCoolLinkedList<E> {
     
     public void reverse()
     {
-        // we are going to a few notes to traverse the LL
-        Node current = head.next;
-        Node previous = null;
-        Node next = null;
-        while (current != null)
+        if (head != null)
         {
-            next = current.next;
-            current.next = previous;
-            current = next;
+            // we are going to a few notes to traverse the LL
+            Node current = head.next;
+            Node previous = null;
+            Node next = null;
+            while (current != null)
+            {
+                next = current.next;
+                current.next = previous;
+                current = next;
+            }
+            this.head = previous;
         }
-        this.head = previous;
     }
     
     public String toString()
@@ -188,10 +191,10 @@ public class MyCoolLinkedList<E> {
         Node temp = head; 		// start at head of list 
         while (temp != null)            // while more nodes on list...
         {
-            out += temp.info + "  ";	// ...append current obj
+            out += temp.info + " ";	// ...append current obj
             temp = temp.next;		// ...and move to next node
         }
-        return out + "\n";
+        return out;
     }
      // ------------- submethods ---------------\\
        public boolean more()

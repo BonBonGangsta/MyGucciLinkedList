@@ -19,7 +19,7 @@ public class ListTester {
        MyCoolLinkedList thomas = new MyCoolLinkedList();
        
        // Create the scanner file with the input file as the source
-       Scanner fileScan = new Scanner(new File("\\list-ops.txt"));
+       Scanner fileScan = new Scanner(new File(".\\list-ops.txt"));
        
        // let the user know the input has been recieved
        System.out.println("The input file has been accepted");
@@ -29,12 +29,12 @@ public class ListTester {
        {
            //create the instance to hold the action that will take place
            String listAction = fileScan.next();
-           
            // here we start the an if statement to see what action
            // must be completed on the list, such as append, delete, etc.
            if (listAction.equals("APPEND"))
            {
-               thomas.append(fileScan.nextInt());
+               int input = fileScan.nextInt();
+               thomas.append(input);
            }
            // if the action is add
            if(listAction.equals("ADD"))
@@ -59,12 +59,12 @@ public class ListTester {
            {
                thomas.reverse(); // thomas will reverse the list
            }
-           else
+           if (listAction.equals("CLEAR"))
            {
                thomas.clear(); // clear list
            }
-           thomas.toString(); // print the list
+           System.out.println(thomas.toString()); // print the list
        }
-       
+       System.out.println("The end of file has been reached.");
    }
 }
