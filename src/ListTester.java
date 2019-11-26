@@ -34,7 +34,7 @@ public class ListTester {
            if (listAction.equals("APPEND"))
            {
                int input = fileScan.nextInt();
-               System.out.print("Appending " + input + " ");
+               System.out.print("Appending " + input + ": ");
                thomas.append(input);
            }
            // if the action is add
@@ -42,7 +42,7 @@ public class ListTester {
            {
                int index = fileScan.nextInt(); // index to replace
                int value = fileScan.nextInt(); // value to add
-               System.out.print("adding " + value + " at " + index +" ");
+               System.out.print("adding " + value + " at " + index +": ");
                thomas.addNode(index, value); // pass them to thomas
            }
            // if the action is delete
@@ -50,7 +50,7 @@ public class ListTester {
            {
                int deletion = fileScan.nextInt();
                thomas.delete(deletion); // pass the index to delete
-               System.out.print("deleting at " + deletion + " ");
+               System.out.print("deleting at " + deletion + ": ");
            }
            // if action is swap
            if(listAction.equals("SWAP"))
@@ -58,17 +58,17 @@ public class ListTester {
                int firstIndex = fileScan.nextInt(); // index1 to swap
                int secondIndex = fileScan.nextInt(); // index2 to swap
                System.out.print("Swapping values at " + firstIndex + " and"
-                       + " at " + secondIndex + " ");
+                       + " at " + secondIndex + ": ");
                thomas.swapNodes(firstIndex, secondIndex); // pass them along
            }
            if(listAction.equals("REVERSE"))
            {
-               System.out.print("Reversing the list!");
+               System.out.print("Reversing the list! - ");
                thomas.reverse(); // thomas will reverse the list
            }
            if (listAction.equals("CLEAR"))
            {
-               System.out.print("clearing the list!");
+               System.out.print("clearing the list! - ");
                thomas.clear(); // clear list
            }
            System.out.println(thomas.toString()); // print the list

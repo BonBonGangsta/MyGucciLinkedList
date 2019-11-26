@@ -12,21 +12,27 @@ public class MyCoolLinkedList<E> {
     private Node head; 
     private Node iterator;
     
+    /**
+     * create a linked list that is empty.
+     */
     public MyCoolLinkedList()
     {
         head = null;
     }
     
-
-    //------- Main methods to be used----------\\
-    
-     public void clear()
+    /**
+     * clear the linked list for which this is called for.
+     */
+    public void clear()
     {
         head = null;
     }
     
-    
-     public void append(E x)
+    /**
+     * append the object at the end of the linked list.
+     * @param x object to which append
+     */
+    public void append(E x)
     {
         // create new Node with "info" member pointing to x
         Node temp = new Node(x);
@@ -38,14 +44,20 @@ public class MyCoolLinkedList<E> {
         else                        // if non-empty...
         {
             Node tracer = head;
+            // get to the last node
             while (tracer.next != null)
             {
                 tracer = tracer.next;
             }
+            // have the next of the last node point to the new node
             tracer.next = temp;    
         }
     }
-     
+    
+    /**
+     * delete the node at a certain key index.
+     * @param key key index to which delete the node from.
+     */
     public void delete(int key)
     {  
        // if the head is null, the list is empty, no point deleting anything.
@@ -55,6 +67,8 @@ public class MyCoolLinkedList<E> {
        }
        if (key == 1)
        {
+           // if the node to delete is the first one, have the head point
+           // to the next one.
            head = head.next;
        }
        else
@@ -78,15 +92,22 @@ public class MyCoolLinkedList<E> {
        }
     }
     
+    /**
+     * add a node at a specific index.
+     * @param index index to insert the new object as a node.
+     * @param x the Object to which needs to be inserted.
+     */
     public void addNode(int index, E x)
     {
         if(head == null)
        {
+           // if the list is empty, you're really just appending.
            this.append(x);
        }
+        // if the index is one, have the new node point to the what the head
+        // is pointing to, and then the head to the new node.
        if (index == 1)
        {
-           Node temp = head;
            Node newN = new Node(x);
            newN.next = head;
            head = newN;
@@ -110,6 +131,11 @@ public class MyCoolLinkedList<E> {
        }
     }
     
+    /**
+     * swap the nodes at two indexes. indexes can be given in any order
+     * @param dis the first index.
+     * @param dat the second index.
+     */
     public void swapNodes(int dis, int dat)
      {  
         int later = 0;
@@ -127,16 +153,18 @@ public class MyCoolLinkedList<E> {
         }
         if (dis == dat)
         {
-            return;
+            return; // nothing to do
         }
         // if the head is null, the list is empty, no point swapping anything.
         if(head == null)
         {
             return;
         }
-        // we need a Two temporary node to traverse the beyond...
+        // we need a four temporary node to traverse the beyond...
         Node swap1 = head;
         Node swap2 = head;
+        Node swap1prev = null;
+        Node swap2prev = null;
         boolean found = false;
         while(!found)
         {
@@ -146,64 +174,75 @@ public class MyCoolLinkedList<E> {
         // exists, than the one before is bound to exist.
         for (int counter = 1; counter < later; counter++ )
         {
+           // point the previous one to the node
+            swap1prev = swap1;
            // move temp to what ever the next one is pointing to.
            swap1 = swap1.next;
-           // check to see if the node is pointing to anything after
-           if (swap1 == null || swap1.next == null)
-           {
-                swap1 = null; // the furthest node points to nowhere
-           }
         }
         found = true;
         for (int counter = 1; counter < sooner; counter++ )
           {
+           // point the previous one to the node
+           swap2prev = swap2;
            // move temp to what ever the next one is pointing to.
            swap2 = swap2.next;
           }
         }
         if(found)
         {
-            if (swap1.next == null)
+            if (swap1 != null && swap2 != null)
             {
-               swap1.next = swap2.next;
-               
+                // if the previous is not null, then use point to it
+                if(swap1prev != null)
+                    swap1prev.next = swap2;
+                else // swap1 is the first element
+                    head = swap2;
+                // if the second node previous is not null point to it
+                if (swap2prev !=null)
+                    swap2prev.next = swap1;
+                else
+                    head = swap1;
+                
+                // swap
+                Node tempNode = swap1.next;
+                swap1.next = swap2.next;
+                swap2.next = tempNode;
             }
-            Node swapTemp = swap1;
-            swap1.next = swap2;
-            swap2.next = swapTemp;
-        }  
+           
+        }
      }
     
+    /**
+     * reverse the list for which this method is called for.
+     */
     public void reverse()
     {
         if (head != null)
         {
             // create two start points for the start and end of the LL
-            Node start = this.head;
-            Node tail = this.head;
-            
-            int lengthOfLinkedList = 0;
-            //traverse until the last node
-            while (tail.next != null)
+            Node start = head.next;
+            Node reverse = head;
+            // start resetting the head
+            reverse.next = null;
+            // while there is still nodes
+            while(start != null)
             {
-                tail = tail.next;
-                lengthOfLinkedList++;
-            }
-            
-            int numberOfRuns = lengthOfLinkedList / 2; // will force an int
-            // this will give us how many times we need to swap nodes
-            for (int i = 0; i < numberOfRuns ; i++)
-            {
-                // create a temporary node to store the start
-                Node swapTemp = start;
-                start.next = tail; // the start points turns to the end
-                tail.next = swapTemp; //end becomes the front
-            }
+                // create a temporary start
+                Node temp = start;
+                start = start.next; // move to the next
                 
-            
+                temp.next = reverse; // temp points to reverse
+                reverse = temp; // reverse is now the temp.
+            }
+            head = reverse;
         }
     }
     
+    /**
+     * Generate a String of all objects in the list for which this is called
+     * for.
+     * @return String generated.
+     */
     public String toString()
     {
         String out = "";

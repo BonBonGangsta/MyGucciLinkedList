@@ -1,0 +1,22 @@
+run:
+The input file has been accepted
+Appending 5: 5 
+Appending 20: 5 20 
+Appending 12: 5 20 12 
+Appending 37: 5 20 12 37 
+adding 7 at 3: 5 20 7 12 37 
+adding 19 at 1: 19 5 20 7 12 37 
+deleting at 3: 19 5 7 12 37 
+deleting at 1: 5 7 12 37 
+adding 44 at 1: 44 5 7 12 37 
+adding 22 at 2: 44 22 5 7 12 37 
+deleting at 6: 44 22 5 7 12 
+Swapping values at 3 and at 5: 44 22 12 7 5 
+Reversing the list! - 5 7 12 22 44 
+Swapping values at 1 and at 3: 12 7 5 22 44 
+Swapping values at 3 and at 4: 12 7 22 5 44 
+Swapping values at 2 and at 2: 12 7 22 5 44 
+clearing the list! - 
+Reversing the list! - 
+The end of file has been reached.
+BUILD SUCCESSFUL (total time: 0 seconds)
