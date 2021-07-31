@@ -1,12 +1,3 @@
-/*
-    I affirm that this program is entirely my own work and none 
-    of it is the work of any other person.
-	
-        ___________________
-	Byron De Paz
-        3999061
-
- */
 import java.io.IOException ;
 import java.io.File ;
 import java.util.Scanner ;
